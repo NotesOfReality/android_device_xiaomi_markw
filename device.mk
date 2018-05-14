@@ -219,6 +219,10 @@ PRODUCT_PACKAGES += \
     android.hardware.health@1.0-convert \
     android.hardware.health@1.0-service
 
+# Healthd packages
+PRODUCT_PACKAGES += \
+    charger_res_images
+
 # HIDL
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
