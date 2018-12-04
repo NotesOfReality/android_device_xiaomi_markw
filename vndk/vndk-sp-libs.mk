@@ -29,7 +29,7 @@ VNDK_SP_LIBRARIES := \
 
 VNDK_SP_EXT_LIBRARIES := \
     android.hidl.base@1.0
-    
+
 EXTRA_VENDOR_LIBRARIES := \
     android.hidl.manager@1.0 \
     vendor.display.color@1.0 \
