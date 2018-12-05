@@ -2,7 +2,7 @@
 # system.prop for markw
 #
 
-# Art
+# (ART) Dex2oat threads for faster app installation
 ro.sys.fw.dex2oat_thread_count=8
 
 # Audio
