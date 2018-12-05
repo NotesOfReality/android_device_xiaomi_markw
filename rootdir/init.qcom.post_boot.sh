@@ -332,17 +332,19 @@ case "$target" in
                 # Governor settings
                 echo 1 > /sys/devices/system/cpu/cpu0/online
                 echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-                echo "20000 1209600:40000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
-                echo 95 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+                echo "19000 1401600:39000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+                echo 85 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+                echo 20000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate
                 echo 1401600 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
                 echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
-                echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+                echo "85 1401600:80" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
+                echo 39000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
                 echo 652800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
                 echo 652800 > /sys/devices/system/cpu/cpufreq/interactive/screen_off_maxfreq
 
                 ### CPU_BOOST
-                echo 1036800 > /sys/module/cpu_boost/parameters/input_boost_freq
-                echo 100 > /sys/module/cpu_boost/parameters/input_boost_ms
+                echo 1804800 > /sys/module/cpu_boost/parameters/input_boost_freq
+                echo 440 > /sys/module/cpu_boost/parameters/input_boost_ms
 
                 # Virtual memory tweaks
                 echo 10 > /proc/sys/vm/swappiness
@@ -390,8 +392,8 @@ case "$target" in
                 echo 6 > /sys/class/kgsl/kgsl-3d0/default_pwrlevel
 
                 # SMP scheduler
-                echo 85 > /proc/sys/kernel/sched_upmigrate
-                echo 85 > /proc/sys/kernel/sched_downmigrate
+                echo 100 > /proc/sys/kernel/sched_upmigrate
+                echo 100 > /proc/sys/kernel/sched_downmigrate
                 echo 19 > /proc/sys/kernel/sched_upmigrate_min_nice
 
                 # Enable sched guided freq control
