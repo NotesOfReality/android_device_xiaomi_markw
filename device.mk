@@ -398,9 +398,16 @@ PRODUCT_COPY_FILES += \
 
 # Implementation of the power-off charging animation from MIUI
 PRODUCT_PACKAGES += \
-chargeonlymode
+    chargeonlymode
 
 # XiaomiParts
 PRODUCT_PACKAGES += \
     XiaomiDoze \
     XiaomiParts
+	
+#Favorite Prebuilt Apps
+PRODUCT_PACKAGES += \
+    EnhancedIME\
+	Google-Markup-Port-O\
+    MiXplorer \
+	Retro-Music
