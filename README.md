@@ -25,9 +25,10 @@ Copyright 2017 - LineageOS
 
 ![Xiaomi Redmi 4 Prime](http://cdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-4-prime-2.jpg "Xiaomi Redmi 4 Prime")
 
-This Device Tree also has:
--my favorite prebuilt apps ---> https://github.com/NotesOfReality/android_device_xiaomi_markw/commit/d9ec64d040e8b3928a7b5a9cf0e0077997b6f51c
--a custom "Ambient Display/Doze" package added from MiracleDroid-HnT (thanks @Razziell and @Hikari-no-Tenshi)
--a custom "Device Parts/Settings" package called "XiaomiParts" (thanks @Razziell and @Hikari-no-Tenshi)
+| This Device Tree also has:|
+| :---------------------- |
+| -my favorite prebuilt apps ---> https://github.com/NotesOfReality/android_device_xiaomi_markw/commit/d9ec64d040e8b3928a7b5a9cf0e0077997b6f51c |
+| -a custom "Ambient Display/Doze" package added from MiracleDroid-HnT (thanks @Razziell and @Hikari-no-Tenshi) |
+| -a custom "Device Parts/Settings" package called "XiaomiParts" (thanks @Razziell and @Hikari-no-Tenshi) |
 
 If you're building MiracleDroid Oreo 8.1 you don't need any kind of adaptation to implement these two latest packages/build modules, otherwise you should look at the modification I've done to AICP-O_8.1 https://github.com/NotesOfReality/android_frameworks_base--DIFF/tree/AICP-O___o8.1/ and https://github.com/NotesOfReality/android_packages_apps_Settings/tree/AICP-O___o8.1/ .
