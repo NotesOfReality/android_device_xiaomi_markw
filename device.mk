@@ -407,7 +407,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     chargeonlymode
 
-# XiaomiParts
+# Markw-specific Apps
 PRODUCT_PACKAGES += \
     XiaomiDoze \
     XiaomiParts
