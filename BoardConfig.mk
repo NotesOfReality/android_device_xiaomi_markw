@@ -97,6 +97,9 @@ TARGET_USES_QTI_CAMERA_DEVICE := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
+# Enable real time lockscreen charging current values
+BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
+
 # CNE / DPM
 BOARD_USES_QCNE := true
 
@@ -188,9 +191,6 @@ TARGET_HAS_NO_WIFI_STATS := true
 
 # Tap2Wake
 TARGET_TAP_TO_WAKE_NODE := "/proc/gesture/onoff"
-
-# Enable real time lockscreen charging current values
-BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
 
 # Qualcomm
 BOARD_USES_QCOM_HARDWARE := true
