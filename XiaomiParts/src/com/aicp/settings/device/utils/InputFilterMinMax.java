@@ -1,4 +1,4 @@
-package com.lineage.settings.device.utils;
+package com.aicp.settings.device.utils;
 
 import android.text.InputFilter;
 import android.text.Spanned;

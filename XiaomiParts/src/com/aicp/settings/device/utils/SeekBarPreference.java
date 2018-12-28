@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package com.lineage.settings.device.utils;
+package com.aicp.settings.device.utils;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -35,7 +35,7 @@ import android.widget.TextView;
 import android.os.Handler;
 import android.os.Message;
 
-import com.lineage.settings.device.R;
+import com.aicp.settings.device.R;
 
 public class SeekBarPreference extends Preference {
 
