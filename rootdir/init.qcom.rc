@@ -208,6 +208,7 @@ on boot
     # Audio amplifier kernel module
     chown audioserver system /sys/audio_amplifier/enable
 
+    # KCAL permissions (needed for KCAL front-end controls in "XiaomiParts")
     chown system system /sys/devices/platform/kcal_ctrl.0/kcal
     chown system system /sys/devices/platform/kcal_ctrl.0/kcal_enable
     chown system system /sys/devices/platform/kcal_ctrl.0/kcal_cont
