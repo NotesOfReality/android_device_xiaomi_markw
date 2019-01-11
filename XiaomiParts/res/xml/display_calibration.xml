@@ -92,7 +92,7 @@
         app:max_value="1536"
         app:min_value="0"
         app:default_value="0"/>
-    <!-- <SwitchPreference
+	<!-- <SwitchPreference
         android:key="kcal_invert"
         android:title="@string/kcal_invert_title"
         android:summary="@string/kcal_invert_summary"
