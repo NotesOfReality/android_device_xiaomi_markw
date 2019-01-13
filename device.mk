@@ -416,10 +416,3 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     XiaomiDoze \
     XiaomiParts
-	
-#Favorite Prebuilt Apps
-PRODUCT_PACKAGES += \
-	EnhancedIME\
-	Google-Markup-Port-O\
-	MiXplorer \
-	Retro-Music
