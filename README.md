@@ -30,7 +30,6 @@ The main/fundamental reason of this suggestion are the overlay/s folder/s in the
 
 | This Device Tree also has:|
 | :---------------------- |
-| -my favorite prebuilt apps ---> https://github.com/NotesOfReality/android_device_xiaomi_markw/commit/781c482c122deff0a96428c04b7cdb403bc94c39 |
 | -a custom "Ambient Display/Doze" package added from MiracleDroid-HnT (thanks @Razziell and @Hikari-no-Tenshi) |
 | -a custom "Device Parts/Settings" package called "XiaomiParts" (thanks @Razziell and @Hikari-no-Tenshi) |
 
