@@ -16,17 +16,20 @@
 
 $(call inherit-product, device/xiaomi/markw/full_markw.mk)
 
-# Inherit some common MDroid stuff.
-$(call inherit-product, vendor/mdroid/config/common_full_phone.mk)
+# Inherit some common DU stuff.
+$(call inherit-product, vendor/du/config/common_full_phone.mk)
 
-PRODUCT_NAME := mdroid_markw
+# Device identifier. This must come after all inclusions
+PRODUCT_NAME := du_markw
 BOARD_VENDOR := Xiaomi
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=markw \
-    PRIVATE_BUILD_DESC="markw-user 6.0.1 MMB29M V9.6.2.0.MBEMIFD release-keys"
-	DEVICE_MAINTAINERS="NotesOfReality (Micky99)"
+    PRODUCT_NAME="markw" \
+    TARGET_DEVICE="markw" \
+    PRIVATE_BUILD_DESC="markw-user 6.0.1 MMB29M V9.6.2.0.MBEMIFD release-keys" \
+	  DEVICE_MAINTAINERS="NotesOfReality (Micky99)"
 
+# Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
 BUILD_FINGERPRINT := Xiaomi/markw/markw:6.0.1/MMB29M/V9.6.2.0.MBEMIFD:user/release-keys

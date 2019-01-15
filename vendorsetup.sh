@@ -1,2 +1,2 @@
-add_lunch_combo mdroid_markw-user
-add_lunch_combo mdroid_markw-userdebug
+add_lunch_combo du_markw-user
+add_lunch_combo du_markw-userdebug
