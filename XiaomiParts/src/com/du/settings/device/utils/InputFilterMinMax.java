@@ -1,4 +1,4 @@
-package com.mdroid.settings.device.utils;
+package com.du.settings.device.utils;
 
 import android.text.InputFilter;
 import android.text.Spanned;

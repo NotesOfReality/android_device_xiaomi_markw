@@ -15,7 +15,7 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 */
-package com.mdroid.settings.device;
+package com.du.settings.device;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -30,27 +30,34 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.os.Bundle;
 import android.util.Log;
+import android.os.Vibrator;
 
 import java.util.List;
 
-public class YellowTorchBrightnessPreference extends Preference implements
+public class VibratorStrengthPreference extends Preference implements
         SeekBar.OnSeekBarChangeListener {
 
     private SeekBar mSeekBar;
-    private int mOldBrightness;
+    private int mOldStrength;
     private int mMinValue;
     private int mMaxValue;
     private float offset;
+    private Vibrator mVibrator;
     private TextView mValueText;
 
-    private static final String FILE_BRIGHTNESS = "/sys/devices/soc/qpnp-flash-led-24/leds/led:torch_1/max_brightness";
+    private static final String FILE_LEVEL = "/sys/class/timed_output/vibrator/vtg_level";
+    private static final long testVibrationPattern[] = {0,250};
 
-    public YellowTorchBrightnessPreference(Context context, AttributeSet attrs) {
+    public VibratorStrengthPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mMinValue = 0;
-        mMaxValue = 200;
+        // from drivers/platform/msm/qpnp-haptic.c
+        // #define QPNP_HAP_VMAX_MIN_MV		116
+        // #define QPNP_HAP_VMAX_MAX_MV		3596
+        mMinValue = 116;
+        mMaxValue = 3596;
         offset = mMaxValue / 100f;
 
+        mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         setLayoutResource(R.layout.preference_seek_bar);
     }
 
@@ -58,28 +65,31 @@ public class YellowTorchBrightnessPreference extends Preference implements
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        mOldBrightness = Integer.parseInt(getValue(getContext()));
+        mOldStrength = Integer.parseInt(getValue(getContext()));
         mSeekBar = (SeekBar) holder.findViewById(R.id.seekbar);
         mSeekBar.setMax(mMaxValue - mMinValue);
-        mSeekBar.setProgress(mOldBrightness - mMinValue);
+        mSeekBar.setProgress(mOldStrength - mMinValue);
         mValueText = (TextView) holder.findViewById(R.id.current_value);
-        mValueText.setText(Integer.toString(Math.round(mOldBrightness / offset)) + "%");
+        mValueText.setText(Integer.toString(Math.round(mOldStrength / offset)) + "%");
         mSeekBar.setOnSeekBarChangeListener(this);
     }
 
     public static boolean isSupported() {
-        return Utils.fileWritable(FILE_BRIGHTNESS);
+        return Utils.fileWritable(FILE_LEVEL);
     }
 
     public static String getValue(Context context) {
-        return Utils.getFileValue(FILE_BRIGHTNESS, "200");
+        return Utils.getFileValue(FILE_LEVEL, "2700");
     }
 
-    private void setValue(String newValue) {
-        Utils.writeValue(FILE_BRIGHTNESS, newValue);
+    private void setValue(String newValue, boolean withFeedback) {
+        Utils.writeValue(FILE_LEVEL, newValue);
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
-        editor.putString(DeviceSettings.KEY_YELLOW_TORCH_BRIGHTNESS, newValue);
+        editor.putString(DeviceSettings.KEY_VIBSTRENGTH, newValue);
         editor.commit();
+	    if (withFeedback) {
+            mVibrator.vibrate(testVibrationPattern, -1);
+        }
     }
 
     public static void restore(Context context) {
@@ -87,13 +97,13 @@ public class YellowTorchBrightnessPreference extends Preference implements
             return;
         }
 
-        String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(DeviceSettings.KEY_YELLOW_TORCH_BRIGHTNESS, "200");
-        Utils.writeValue(FILE_BRIGHTNESS, storedValue);
+        String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(DeviceSettings.KEY_VIBSTRENGTH, "2700");
+        Utils.writeValue(FILE_LEVEL, storedValue);
     }
 
     public void onProgressChanged(SeekBar seekBar, int progress,
             boolean fromTouch) {
-        setValue(String.valueOf(progress + mMinValue));
+        setValue(String.valueOf(progress + mMinValue), true);
         mValueText.setText(Integer.toString(Math.round((progress + mMinValue) / offset)) + "%");
     }
 

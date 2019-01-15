@@ -15,7 +15,7 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 */
-package com.mdroid.settings.device;
+package com.du.settings.device;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -33,7 +33,7 @@ import android.util.Log;
 
 import java.util.List;
 
-public class WhiteTorchBrightnessPreference extends Preference implements
+public class YellowTorchBrightnessPreference extends Preference implements
         SeekBar.OnSeekBarChangeListener {
 
     private SeekBar mSeekBar;
@@ -43,9 +43,9 @@ public class WhiteTorchBrightnessPreference extends Preference implements
     private float offset;
     private TextView mValueText;
 
-    private static final String FILE_BRIGHTNESS = "/sys/devices/soc/qpnp-flash-led-24/leds/led:torch_0/max_brightness";
+    private static final String FILE_BRIGHTNESS = "/sys/devices/soc/qpnp-flash-led-24/leds/led:torch_1/max_brightness";
 
-    public WhiteTorchBrightnessPreference(Context context, AttributeSet attrs) {
+    public YellowTorchBrightnessPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mMinValue = 0;
         mMaxValue = 200;
@@ -78,7 +78,7 @@ public class WhiteTorchBrightnessPreference extends Preference implements
     private void setValue(String newValue) {
         Utils.writeValue(FILE_BRIGHTNESS, newValue);
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
-        editor.putString(DeviceSettings.KEY_WHITE_TORCH_BRIGHTNESS, newValue);
+        editor.putString(DeviceSettings.KEY_YELLOW_TORCH_BRIGHTNESS, newValue);
         editor.commit();
     }
 
@@ -87,7 +87,7 @@ public class WhiteTorchBrightnessPreference extends Preference implements
             return;
         }
 
-        String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(DeviceSettings.KEY_WHITE_TORCH_BRIGHTNESS, "200");
+        String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(DeviceSettings.KEY_YELLOW_TORCH_BRIGHTNESS, "200");
         Utils.writeValue(FILE_BRIGHTNESS, storedValue);
     }
 
