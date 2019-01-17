@@ -26,9 +26,10 @@ $(call inherit-product, vendor/extras/configs/phone-xxhdpi-3072-dalvik-heap.mk)
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay
 
-PRODUCT_ENFORCE_RRO_TARGETS := \
-    Bluetooth \
-    framework-res
+# Actally this is an unnecessary option and it causes many errors, probably because packages don't support this in DU-O_CAF
+#PRODUCT_ENFORCE_RRO_TARGETS := \
+#    Bluetooth \
+#    framework-res
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
