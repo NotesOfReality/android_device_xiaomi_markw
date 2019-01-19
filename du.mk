@@ -31,10 +31,5 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="markw-user 6.0.1 MMB29M V9.6.2.0.MBEMIFD release-keys" \
 	  DEVICE_MAINTAINERS="NotesOfReality (Micky99)"
 
-PRODUCT_PROPERTY_OVERRIDES += \
-BUILD_DISPLAY_ID=$(BUILD_ID) \
-ro.du.version=$(DU_VERSION) \
-ro.mod.version=$(DU_BUILD_TYPE)-$(DU_BASE_VERSION)-$(DATE)
-
 # Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
 BUILD_FINGERPRINT := Xiaomi/markw/markw:6.0.1/MMB29M/V9.6.2.0.MBEMIFD:user/release-keys
