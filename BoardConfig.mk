@@ -194,6 +194,8 @@ TARGET_TAP_TO_WAKE_NODE := "/proc/gesture/onoff"
 
 # Qualcomm
 BOARD_USES_QCOM_HARDWARE := true
+
+# Use Snapdragon LLVM, if available
 TARGET_USE_SDCLANG := true
 
 # RIL
