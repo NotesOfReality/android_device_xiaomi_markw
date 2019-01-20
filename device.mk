@@ -22,10 +22,6 @@ $(call inherit-product, vendor/xiaomi/markw/markw-vendor.mk)
 # DU-O build.prop values for dalvik heap
 $(call inherit-product, vendor/extras/configs/phone-xxhdpi-3072-dalvik-heap.mk)
 
-#Pitiful trial to fix " ERROR: couldn't find ro.mod.version in build.prop " by forcing some DU-O system properties in /system/build.prop , always check them
-# System properties
--include $(LOCAL_PATH)/system_prop.mk
-
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay
