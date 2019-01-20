@@ -46,9 +46,9 @@ BOARD_KERNEL_PAGESIZE :=  2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 TARGET_KERNEL_CONFIG := markw_defconfig
 TARGET_KERNEL_SOURCE := kernel/xiaomi/msm8953
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-opt-linux-android-
-KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-opt-linaro-7.x/bin
-#It seems like these two last codelines don't actually change the toolchain used , so I'll use the following command (without brackets) once I get the ROM built by its default toolchain { time mka bacon -j6 ARCH=arm64 CROSS_COMPILE=/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-opt-linaro-7.x/bin/aarch64-opt-linux-android- 2>&1 | tee test.log } in order to test my favorite one.
+#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-opt-linux-android-
+#KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-opt-linaro-7.x/bin
+#It seems like these two last codelines don't actually change the toolchain used , not even the following command (without brackets) does { time mka bacon -j6 ARCH=arm64 CROSS_COMPILE=/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-opt-linaro-7.x/bin/aarch64-opt-linux-android- 2>&1 | tee test.log } .
 
 # ANT
 BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
