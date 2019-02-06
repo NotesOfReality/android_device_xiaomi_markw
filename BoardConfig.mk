@@ -93,6 +93,9 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_QTI_CAMERA_32BIT_ONLY := true
 TARGET_TS_MAKEUP := true
 
+#[Use CAF 5.3 Camera Driver] Disable Camera IR (which we don't even have) for kernel headers
+BOARD_GLOBAL_CFLAGS += -DCONFIG_MSMB_WITHOUT_IR
+
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
