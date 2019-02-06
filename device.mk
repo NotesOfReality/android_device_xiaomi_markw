@@ -29,6 +29,9 @@ DEVICE_PACKAGE_OVERLAYS += \
 RGET_DENSITY := xxhdpi
 TARGET_BOOT_ANIMATION_RES := 1080
 
+# call FavoritePrebuiltApps
+$(call inherit-product-if-exists, packages/apps/FavoritePrebuiltApps/Favorite__Prebuilt-Apps.mk)
+
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
