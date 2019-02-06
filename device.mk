@@ -27,6 +27,9 @@ PRODUCT_ENFORCE_RRO_TARGETS := \
     Bluetooth \
     framework-res
 
+# call FavoritePrebuiltApps
+$(call inherit-product-if-exists, packages/apps/FavoritePrebuiltApps/Favorite__Prebuilt-Apps.mk)
+
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
