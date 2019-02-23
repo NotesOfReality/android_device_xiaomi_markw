@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+# DU-O build.prop values for dalvik heap
+$(call inherit-product, vendor/extras/configs/phone-xxhdpi-3072-dalvik-heap.mk)
+
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay 
@@ -22,8 +25,8 @@ PRODUCT_ENFORCE_RRO_TARGETS := \
     framework-res
 
 # Boot animation
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1080
+RGET_DENSITY := xxhdpi
+TARGET_BOOT_ANIMATION_RES := 1080
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
