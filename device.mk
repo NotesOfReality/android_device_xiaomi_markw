@@ -21,8 +21,9 @@ $(call inherit-product, vendor/extras/configs/phone-xxhdpi-3072-dalvik-heap.mk)
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay 
 
-PRODUCT_ENFORCE_RRO_TARGETS := \
-    framework-res
+# Actally this is an unnecessary option and it causes many errors, probably because no packages support this in DU-O_CAF
+#PRODUCT_ENFORCE_RRO_TARGETS := \
+#    framework-res
 
 # Boot animation
 RGET_DENSITY := xxhdpi
