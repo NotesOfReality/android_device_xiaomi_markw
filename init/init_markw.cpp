@@ -29,14 +29,14 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/sysinfo.h>
-#include <android-base/file.h>
 #include <android-base/properties.h>
-#include <android-base/strings.h>
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
 
 #include "vendor_init.h"
 #include "property_service.h"
+#include "log.h"
+#include "util.h"
 
 char const *heapstartsize;
 char const *heapgrowthlimit;
@@ -50,7 +50,6 @@ char const *gradient_cache_size;
 char const *drop_shadow_cache_size;
 
 using android::base::GetProperty;
-using android::base::ReadFileToString;
 using android::init::property_set;
 
 void property_override(char const prop[], char const value[])
@@ -62,6 +61,37 @@ void property_override(char const prop[], char const value[])
         __system_property_update(pi, value, strlen(value));
     else
         __system_property_add(prop, strlen(prop), value, strlen(value));
+}
+
+static void init_alarm_boot_properties()
+{
+    int boot_reason;
+    FILE *fp;
+
+    fp = fopen("/proc/sys/kernel/boot_reason", "r");
+    fscanf(fp, "%d", &boot_reason);
+    fclose(fp);
+
+    /*
+     * Setup ro.alarm_boot value to true when it is RTC triggered boot up
+     * For existing PMIC chips, the following mapping applies
+     * for the value of boot_reason:
+     *
+     * 0 -> unknown
+     * 1 -> hard reset
+     * 2 -> sudden momentary power loss (SMPL)
+     * 3 -> real time clock (RTC)
+     * 4 -> DC charger inserted
+     * 5 -> USB charger inserted
+     * 6 -> PON1 pin toggled (for secondary PMICs)
+     * 7 -> CBLPWR_N pin toggled (for external power supply)
+     * 8 -> KPDPWR_N pin toggled (power key pressed)
+     */
+     if (boot_reason == 3) {
+        property_set("ro.alarm_boot", "true");
+     } else {
+        property_set("ro.alarm_boot", "false");
+     }
 }
 
 void check_ram()
@@ -117,22 +147,22 @@ void gsi_check()
 
     product = GetProperty("ro.product.device", "");
 
-    // override device specific props for GSI & P DP*
-    if ((product == "phhgsi_arm64_a") || (product == "marlin")) {
-        property_override("ro.build.tags", "release-keys");
-        property_override("ro.product.model", "Redmi 4 Prime");
+    // override device specific props for GSI *
+    if ((product == "phhgsi_arm64_a")) {
+        property_override("ro.product.model", "Redmi 4");
         property_override("ro.product.brand", "Xiaomi");
         property_override("ro.product.name", "markw");
         property_override("ro.product.device", "markw");
         property_override("ro.product.manufacturer", "Xiaomi");
         property_override("ro.build.product", "markw");
-        property_override("ro.build.description", "markw-user 6.0.1 MMB29M V9.6.2.0.MBEMIFD release-keys");
-        property_override("ro.build.fingerprint", "Xiaomi/markw/markw:6.0.1/MMB29M/V9.6.2.0.MBEMIFD:user/release-keys");
+        property_override("ro.build.description", "markw-user 6.0.1 MMB29M V9.6.2.0.MBECNFD release-keys");
+        property_override("ro.build.fingerprint", "Xiaomi/markw/markw:6.0.1/MMB29M/V9.6.2.0.MBECNFD:user/release-keys");
     }
 }
 
 void vendor_load_properties()
 {
+    init_alarm_boot_properties();
     check_ram();
     gsi_check();
 

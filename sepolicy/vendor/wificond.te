@@ -1,1 +1,0 @@
-dontaudit wificond mm-qcamerad_exec:file getattr;

@@ -1,1 +1,0 @@
-dontaudit fsck mm-qcamerad_exec:file getattr;

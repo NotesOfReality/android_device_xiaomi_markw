@@ -49,9 +49,7 @@ Skylar Chang
 #include <IPACM_Lan.h>
 #include <IPACM_IfaceManager.h>
 #include <IPACM_ConntrackListener.h>
-#ifdef FEATURE_IPACM_HAL
-#include "IPACM_OffloadManager.h"
-#endif
+
 
 /* static member to store the number of total wifi clients within all APs*/
 int IPACM_Wlan::total_num_wifi_clients = 0;
@@ -150,9 +148,6 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 	int wlan_index;
 	ipacm_ext_prop* ext_prop;
 	ipacm_event_iface_up_tehter* data_wan_tether;
-#ifdef FEATURE_IPACM_HAL
-	IPACM_OffloadManager* OffloadMng;
-#endif
 
 	switch (event)
 	{
@@ -371,8 +366,7 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 					if(data_wan_tether->is_sta == false)
 					{
 						ext_prop = IPACM_Iface::ipacmcfg->GetExtProp(IPA_IP_v4);
-						handle_wan_up_ex(ext_prop, IPA_IP_v4,
-							IPACM_Wan::getXlat_Mux_Id());
+						handle_wan_up_ex(ext_prop, IPA_IP_v4, 0);
 					} else {
 						handle_wan_up(IPA_IP_v4);
 					}
@@ -566,14 +560,7 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 						if (IPACM_Wan::backhaul_is_sta_mode == false) /* LTE */
 						{
 							ext_prop = IPACM_Iface::ipacmcfg->GetExtProp(data->prefix.iptype);
-							if (data->prefix.iptype == IPA_IP_v4)
-							{
-								handle_wan_up_ex(ext_prop, data->prefix.iptype,
-									IPACM_Wan::getXlat_Mux_Id());
-							}
-							else {
-								handle_wan_up_ex(ext_prop, data->prefix.iptype, 0);
-							}
+							handle_wan_up_ex(ext_prop, data->prefix.iptype, 0);
 						} else {
 							handle_wan_up(data->prefix.iptype); /* STA */
 						}
@@ -929,28 +916,6 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 		IPACM_Iface::ipacmcfg->DelNatIfaces(dev_name); // delete NAT-iface
 	}
 	break;
-	case IPA_WLAN_FWR_SSR_BEFORE_SHUTDOWN_NOTICE:
-        {
-                IPACMDBG_H("Received IPA_WLAN_FWR_SSR_BEFORE_SHUTDOWN_NOTICE.\n");
-
-                /* internal push add_downstream event in cache */
-                OffloadMng = IPACM_OffloadManager::GetInstance();
-                if (OffloadMng == NULL) {
-                        IPACMERR("failed to get IPACM_OffloadManager instance !\n");
-                } else {
-                        IPACMDBG_H("Update iface %s add_downstream cache events\n", dev_name);
-			if(ip_type == IPA_IP_v4 || ip_type == IPA_IP_MAX)
-			{
-				OffloadMng->push_framework_event(dev_name, prefix[IPA_IP_v4]);
-			}
-			else if(ip_type == IPA_IP_v6 || ip_type == IPA_IP_MAX)
-			{
-				OffloadMng->push_framework_event(dev_name, prefix[IPA_IP_v6]);
-			}
-                }
-                IPACM_Iface::ipacmcfg->DelNatIfaces(dev_name); // delete NAT-iface
-        }
-        break;
 #endif
 	default:
 		break;

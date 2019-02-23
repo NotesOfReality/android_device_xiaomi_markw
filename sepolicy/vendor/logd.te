@@ -1,1 +1,0 @@
-dontaudit logd mm-qcamerad_exec:file getattr;

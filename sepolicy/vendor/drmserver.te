@@ -1,1 +1,0 @@
-dontaudit drmserver mm-qcamerad_exec:file getattr;

@@ -149,7 +149,6 @@ FingerprintAcquiredInfo BiometricsFingerprint::VendorAcquiredFilter(
 
 Return<uint64_t> BiometricsFingerprint::setNotify(
         const sp<IBiometricsFingerprintClientCallback>& clientCallback) {
-    std::lock_guard<std::mutex> lock(mClientCallbackMutex);
     mClientCallback = clientCallback;
     // This is here because HAL 2.1 doesn't have a way to propagate a
     // unique token for its driver. Subsequent versions should send a unique
@@ -199,26 +198,21 @@ Return<RequestStatus> BiometricsFingerprint::enumerate()  {
     fingerprint_finger_id_t results[MAX_FINGERPRINTS];
     uint32_t n = MAX_FINGERPRINTS;
     enumerate_2_0 enumerate = (enumerate_2_0) mDevice->enumerate;
-    int total_templates = enumerate(mDevice, results, &n);
+    int ret = enumerate(mDevice, results, &n);
 
-    ALOGD("Got %d enumerated templates, retval = %d", n, total_templates);
-
-    // Check if the function actually enumerated, or just simply sent a dummy retval.
-    if ((n == MAX_FINGERPRINTS && total_templates < MAX_FINGERPRINTS)
-            || mClientCallback == nullptr) {
-        return RequestStatus::SYS_EINVAL;
-    }
-
-    for (uint32_t i = 0; i < n; i++) {
-        const uint64_t devId = reinterpret_cast<uint64_t>(mDevice);
-        const auto& fp = results[i];
-        ALOGD("onEnumerate(fid=%d, gid=%d, rem=%d)", fp.fid, fp.gid, n -  i - 1);
-        if (!mClientCallback->onEnumerate(devId, fp.fid, fp.gid, n - i - 1).isOk()) {
-            ALOGE("failed to invoke fingerprint onEnumerate callback");
+    if (ret == 0 && mClientCallback != nullptr) {
+        ALOGD("Got %d enumerated templates", n);
+        for (uint32_t i = 0; i < n; i++) {
+            const uint64_t devId = reinterpret_cast<uint64_t>(mDevice);
+            const auto& fp = results[i];
+            ALOGD("onEnumerate(fid=%d, gid=%d)", fp.fid, fp.gid);
+            if (!mClientCallback->onEnumerate(devId, fp.fid, fp.gid, n - i - 1).isOk()) {
+                ALOGE("failed to invoke fingerprint onEnumerate callback");
+            }
         }
     }
 
-    return RequestStatus::SYS_OK;
+    return ErrorFilter(ret);
 }
 
 Return<RequestStatus> BiometricsFingerprint::remove(uint32_t gid, uint32_t fid) {
@@ -302,7 +296,6 @@ fingerprint_device_t* BiometricsFingerprint::openHal() {
 void BiometricsFingerprint::notify(const fingerprint_msg_t *msg) {
     BiometricsFingerprint* thisPtr = static_cast<BiometricsFingerprint*>(
             BiometricsFingerprint::getInstance());
-    std::lock_guard<std::mutex> lock(thisPtr->mClientCallbackMutex);
     if (thisPtr == nullptr || thisPtr->mClientCallback == nullptr) {
         ALOGE("Receiving callbacks before the client callback is registered.");
         return;

@@ -1,1 +1,0 @@
-dontaudit mediaextractor mm-qcamerad_exec:file getattr;

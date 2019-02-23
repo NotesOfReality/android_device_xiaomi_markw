@@ -26,5 +26,5 @@ TARGET_VENDOR := Xiaomi
 PRODUCT_DEVICE := markw
 PRODUCT_NAME := full_markw
 PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := Redmi 4 Prime
+PRODUCT_MODEL := Redmi 4
 PRODUCT_MANUFACTURER := Xiaomi
