@@ -416,10 +416,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:$(TARGET_COPY_OUT_VENDOR)/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
 
-# Implementation of the power-off charging animation from MIUI
-PRODUCT_PACKAGES += \
-    chargeonlymode
-
 # Markw-specific Apps
 PRODUCT_PACKAGES += \
     XiaomiDoze \
