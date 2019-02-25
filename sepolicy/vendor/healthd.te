@@ -1,1 +1,2 @@
 dontaudit healthd mm-qcamerad_exec:file getattr;
+dontaudit healthd self:capability sys_admin;
