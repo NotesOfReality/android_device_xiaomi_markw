@@ -406,10 +406,6 @@ case "$target" in
                 echo 200000 > /proc/sys/kernel/sched_freq_inc_notify
                 echo 200000 > /proc/sys/kernel/sched_freq_dec_notify
 
-                # Display Wakeup (DT2W/Power button) Delay Fix
-                chmod 0664 /sys/devices/soc/qpnp-smbcharger-18/power_supply/battery/subsystem/bms/hi_power
-                echo "1" > /sys/devices/soc/qpnp-smbcharger-18/power_supply/battery/subsystem/bms/hi_power
-
                 # Set Memory parameters
                 configure_memory_parameters
         ;;
