@@ -65,9 +65,5 @@
     Set to -1 to disable the proximity sensor check at all-->
     <integer name="config_flashlightProximityTimeout">-1</integer>
 
-    <!-- Maybe I'll add the support for this boolean later -->
-    <!-- Whether to ignore RSSNR for LTE -->
-    <!-- <bool name="config_ignore_rssnr">true</bool> -->
-
 </resources>
 

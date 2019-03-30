@@ -16,4 +16,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Whether device supports an alt. ambient display -->
     <bool name="config_alt_ambient_display">true</bool>
+
+    <!-- Whether to ignore RSSNR for LTE -->
+    <<bool name="config_ignore_rssnr">true</bool>
 </resources>
