@@ -18,5 +18,5 @@
     <bool name="config_alt_ambient_display">true</bool>
 
     <!-- Whether to ignore RSSNR for LTE -->
-    <<bool name="config_ignore_rssnr">true</bool>
+    <bool name="config_ignore_rssnr">true</bool>
 </resources>
