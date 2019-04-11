@@ -207,7 +207,7 @@ ro.telephony.call_ring.multiple=false \
 ro.telephony.default_network=9,9 \
 service.qti.ims.enabled=1 \
 telephony.lteOnCdmaDevice=1 \
-#hdvoice, for those who activated in the modem \
+#hdvoice, for those who activated in the modem
 ro.ril.enable.amr.wideband=1 \
 ril.ecclist=000,08,100,101,102,110,112,118,119,120,122,911,999
 
