@@ -20,7 +20,6 @@ persist.vendor.audio.fluence.speaker=true \
 persist.vendor.audio.fluence.voicecall=true \
 persist.vendor.audio.fluence.voicerec=true \
 persist.vendor.audio.hw.binder.size_kbyte=1024 \
-ro.af.client_heap_size_kbyte=7168 \
 ro.vendor.audio.sdk.fluencetype=fluence \
 ro.vendor.audio.sdk.ssr=false \
 vendor.audio.flac.sw.decoder.24bit=true \
@@ -96,13 +95,15 @@ debug.enable.sglscale=1 \
 debug.gralloc.enable_fb_ubwc=1 \
 debug.mdpcomp.logs=0 \
 debug.sf.hw=0 \
+debug.sf.latch_unsignaled=1 \
 dev.pm.dyn_samplingrate=1 \
 persist.demo.hdmirotationlock=false \
 persist.hwc.mdpcomp.enable=true \
 ro.opengles.version=196610 \
 ro.sf.lcd_density=440 \
 debug.sdm.support_writeback=0 \
-sdm.debug.rotator_downscale=1
+sdm.debug.rotator_downscale=1 \
+sdm.debug.disable_skip_validate=1
 
 # DRM
 PRODUCT_PROPERTY_OVERRIDES += \
