@@ -23,9 +23,9 @@ $(call inherit-product, vendor/xiaomi/markw/markw-vendor.mk)
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay
 
-PRODUCT_ENFORCE_RRO_TARGETS := \
-    Bluetooth \
-    framework-res
+#PRODUCT_ENFORCE_RRO_TARGETS := \
+#    Bluetooth \
+#    framework-res
 
 # call FavoritePrebuiltApps
 $(call inherit-product-if-exists, packages/apps/FavoritePrebuiltApps/Favorite__Prebuilt-Apps.mk)
