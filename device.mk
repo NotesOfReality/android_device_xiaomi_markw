@@ -24,9 +24,9 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
     $(LOCAL_PATH)/overlay-lineage
 
-PRODUCT_ENFORCE_RRO_TARGETS := \
-    Bluetooth \
-    framework-res
+#PRODUCT_ENFORCE_RRO_TARGETS := \
+#    Bluetooth \
+#    framework-res
 
 # call FavoritePrebuiltApps
 $(call inherit-product-if-exists, packages/apps/FavoritePrebuiltApps/Favorite__Prebuilt-Apps.mk)
