@@ -6,8 +6,6 @@
 PRODUCT_PROPERTY_OVERRIDES += \
 # (ART) Dex2oat threads for faster app installation
 ro.sys.fw.dex2oat_thread_count=8  \
-dalvik.vm.dex2oat-filter=speed \
-dalvik.vm.image-dex2oat-filter=speed
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
