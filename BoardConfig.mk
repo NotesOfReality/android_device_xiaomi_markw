@@ -238,8 +238,5 @@ TARGET_QCOM_MEDIA_VARIANT := caf-msm8996
 TARGET_QCOM_DISPLAY_VARIANT := caf-msm8996
 TARGET_QCOM_BLUETOOTH_VARIANT := caf-msm8996
 
-# Enable workaround for slow rom flash
-BOARD_SUPPRESS_SECURE_ERASE := true
-
 # Inherit from the proprietary version
 -include vendor/xiaomi/markw/BoardConfigVendor.mk
