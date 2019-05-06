@@ -305,7 +305,7 @@ PRODUCT_PACKAGES += \
     libjson
 
 # QTI performance
-PRODUCT_BOOT_JARS += \
+#PRODUCT_BOOT_JARS += \
     QPerformance
 
 # Properties
