@@ -33,12 +33,24 @@ Release Date | November 2016
 
 ![Xiaomi Redmi 4 Prime](http://cdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-redmi-4-prime-2.jpg "Xiaomi Redmi 4 Prime")
 
-I suggest you to use this branch (MiracleDROID) instead of the "lineage-15.1" one if the ROM you want to build doesn't have the "lineage-sdk" https://github.com/LineageOS/android_lineage-sdk/tree/lineage-15.1 and "LineageParts" https://github.com/LineageOS/android_packages_apps_LineageParts/tree/lineage-15.1 repos in its manifests repo https://github.com/MiracleDROID/android/tree/android-8.1/ / https://github.com/DirtyUnicorns/android_manifest/tree/o8x/ .
-The main/fundamental reason of this suggestion are the overlay/s folder/s in these two branches.
+* I suggest you to use this branch (MiracleDROID or a branch based on it) instead of the "lineage-15.1" one if the ROM you want to build doesn't have the [lineage-sdk](https://github.com/LineageOS/android_lineage-sdk/tree/lineage-15.1) and [LineageParts]( https://github.com/LineageOS/android_packages_apps_LineageParts/tree/lineage-15.1) repos in its manifest/s repo (example of manifest/s repos:[MiracleDROID](https://github.com/MiracleDROID/android/tree/android-8.1/), [DirtyUnicorns](https://github.com/DirtyUnicorns/android_manifest/tree/o8x/), [crDroid](https://github.com/crdroidandroid/androidtree/8.1), [POSP](https://github.com/PotatoProject/manifest/tree/aligot-release) .
+The main/fundamental reason of this suggestion are the [overlay/s](https://www.youtube.com/watch?v=O1IAmy_hnVU&t=8s) folder/s in these two branches.
+
+* The "DU-O___o8x-caf___Experimental" branch may be better than the "MiracleDROID" one if you're going to build a CAF-based ROM, which may require you to use as many CAF HALs in place of the AOSP/LOS-based ones.
 
 | This Device Tree also has:|
 | :---------------------- |
 | -a custom "Ambient Display/Doze" package added from MiracleDroid-HnT (thanks @Razziell and @Hikari-no-Tenshi) |
 | -a custom "Device Parts/Settings" package called "XiaomiParts" (thanks @Razziell and @Hikari-no-Tenshi) |
 
-If you're building MiracleDroid Oreo 8.1 you don't need any kind of adaptation to implement these two latest packages/build modules, otherwise you should look at the modification I've done to AICP-O_8.1 https://github.com/NotesOfReality/android_frameworks_base--DIFF/tree/AICP-O___o8.1/ and https://github.com/NotesOfReality/android_packages_apps_Settings/tree/AICP-O___o8.1/ .
+* If you're building DirtyUnicorns Oreo (based on Android 8.1) you don't need any kind of adaptation to implement the custom "Ambient Display/Doze" packages/build module, in order to implement a "Device Parts/Settings" package you should cherry-pick this [single commit in "Settings" app repo](https://github.com/NotesOfReality/android_packages_apps_Settings/commit/b7cf488f54c3eb0dddcbdcbb8f793bfa447cef3d).
+* If you're not building DirtyUnicorns (based on Android 8.1) you may very very probably have to cherry-pick the modifications I've committed in LineageOS-15.1 [frameworks_base](https://github.com/NotesOfReality/android_frameworks_base--DIFF/tree/lineage-15.1) and ["Settings" app](https://github.com/NotesOfReality/android_packages_apps_Settings/tree/lineage-15.1) repos in order to implement those two custom DT packages.
+
+
+*Before the start of the ROM building process, check if your ROM has [this commit](https://github.com/MiracleDROID/android_system_sepolicy/commit/570ef945002a218a3da36fbe5c3bbe01a6d4b221) in its [system_sepolicy repo](https://github.com/DirtyUnicorns/android_system_sepolicy/tree/o8x) and it doesn't (like DU), just cherry-pick it.
+Doing so prevents a stupid "system_sepolicy"-related error and it's far far better and **safer** than just commenting out or deleting(/nuking) that ["external" error-causing line](https://github.com/DirtyUnicorns/android_system_sepolicy/blob/o8x/public/domain.te#L447) or the ["internal" one](https://github.com/NotesOfReality/android_device_xiaomi_markw/blob/DU-O___o8x-caf___Experimental/sepolicy/vendor/system_server.te#L4).*
+
+A fast way to do it would be(starting a shell in the root of the android building environment):
+```
+cd system/sepolicy && git remote add MiracleDROID https://github.com/MiracleDROID/android_system_sepolicy/ && git fetch MiracleDROID && git cherry-pick 570ef945002a218a3da36fbe5c3bbe01a6d4b221
+```
