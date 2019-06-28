@@ -31,6 +31,7 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53
 
+#Audio, media and display HALs (family) variants specified by TARGET_BOARD_PLATFORM
 TARGET_BOARD_PLATFORM := msm8953
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno506
 
@@ -86,6 +87,8 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM := true
+#Bluetooth HAL variant
+TARGET_QCOM_BLUETOOTH_VARIANT := caf-msm8996
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
@@ -199,9 +202,6 @@ BOARD_USES_QCOM_HARDWARE := true
 # Use Snapdragon LLVM, if available
 TARGET_USE_SDCLANG := true
 
-# RIL
-TARGET_RIL_VARIANT := caf
-
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/fstab.qcom
 
@@ -232,12 +232,6 @@ WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 WIFI_HIDL_FEATURE_AWARE := true
-
-#Specifying some CAF HALs variants
-TARGET_QCOM_AUDIO_VARIANT := caf-msm8996
-TARGET_QCOM_MEDIA_VARIANT := caf-msm8996
-TARGET_QCOM_DISPLAY_VARIANT := caf-msm8996
-TARGET_QCOM_BLUETOOTH_VARIANT := caf-msm8996
 
 # Inherit from the proprietary version
 -include vendor/xiaomi/markw/BoardConfigVendor.mk
